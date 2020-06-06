@@ -68,7 +68,7 @@
             
             saveLastExercise(this.lastExercise);
 
-            if(this.lastExercise.percentage == 100) {
+            if(this.lastExercise.percentage === 100) {
                 this.title = this.scoreTexts.high.title;
                 this.text = this.scoreTexts.high.message;
             } else if (this.lastExercise.percentage >= 50) {

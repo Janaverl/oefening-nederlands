@@ -10,7 +10,7 @@ function shuffleArray(array) {
 }
 
 function hasEqualCleanString(myAnswer, answer) {
-    if(myAnswer.toLowerCase().trim() == answer.toLowerCase().trim()) {
+    if(myAnswer.toLowerCase().trim() === answer.toLowerCase().trim()) {
         return true;
     }
     return false;
@@ -21,7 +21,7 @@ function getPercentage(current, total) {
 }
 
 function isLastExercise(currentNr, total){
-    if(currentNr == total){
+    if(currentNr === total){
       return true;
     }
     return false;
