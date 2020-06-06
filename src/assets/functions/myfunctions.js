@@ -30,42 +30,9 @@ function isLastExercise(currentNr, total){
     return false;
 }
 
-function getDate(date) {
-    var dd = String(date.getDate()).padStart(2, '0');
-    var mm = String(date.getMonth() + 1).padStart(2, '0');
-    var yyyy = date.getFullYear();
-
-    return mm + '/' + dd + '/' + yyyy;
-}
-
-function saveLastExercise(lastExercise){
-    let allExercises = [];
-
-    if (localStorage.allExercises) {
-        var jsonString = localStorage.getItem("allExercises");
-        allExercises = JSON.parse(jsonString);
-    }
-    lastExercise.date = getDate(lastExercise.date);
-    allExercises.unshift(lastExercise);
-
-    localStorage.setItem("allExercises", JSON.stringify(allExercises));
-}
-
-function getAllExercises(){
-    if (localStorage.allExercises) {
-        var jsonString = localStorage.getItem("allExercises");
-        const allExercises = JSON.parse(jsonString);
-        console.log(allExercises);
-        return allExercises;
-    }
-    return [];
-}
-
 export {
     shuffleArray,
     getPercentage,
     isLastExercise,
-    saveLastExercise,
-    getAllExercises,
     hasEqualCleanString
 }

@@ -15,7 +15,7 @@
                 Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{ lastExercise.percentage}}%)
             </h5>
 
-            <p>{{text}}</p>
+            <p>{{message}}</p>
 
             <button
                 class="btn btn-primary"
@@ -39,21 +39,22 @@
 </template>
 
 <script>
-    import {ContentEventBus} from '../../main.js';
+  import {ContentEventBus} from '../../main.js';
 
-    import {saveLastExercise} from '../../assets/functions/myfunctions.js'
-
-    import jsonAppContent from '../../assets/data/appContent.json';
-
+  import {
+    setLastExercise,
+    getBtnText,
+    getScoreTitle,
+    getScoreMessage
+  } from '../../asstets/functions/dataHandler.js'
 
     export default {
         name: 'Score',
         data: function() {
             return{
-                scoreTexts: jsonAppContent.score,
-                btnText: jsonAppContent.btn.textReplay,
+                btnText: getBtnText('textReplay'),
                 title: null,
-                text: null
+                message: null
             };
         },
         props: {
@@ -62,21 +63,21 @@
         methods: {
             reStart() {
                 ContentEventBus.$emit('reStartExercises');
-            }
+            },
+            setText(level) {
+              this.title = getScoreTitle(level);
+              this.message = getScoreMessage(level);
+            },
         },
         mounted() {
-            
-            saveLastExercise(this.lastExercise);
+            setLastExercise(this.lastExercise);
 
             if(this.lastExercise.percentage === 100) {
-                this.title = this.scoreTexts.high.title;
-                this.text = this.scoreTexts.high.message;
+                this.setText('high');
             } else if (this.lastExercise.percentage >= 50) {
-                this.title = this.scoreTexts.medium.title;
-                this.text = this.scoreTexts.medium.message; 
+                this.setText('medium');
             } else {
-                this.title = this.scoreTexts.low.title;
-                this.text = this.scoreTexts.low.message;
+                this.setText('low');
             }
         },
     }

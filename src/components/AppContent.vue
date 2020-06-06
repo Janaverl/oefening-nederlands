@@ -16,9 +16,6 @@
 
   import {ContentEventBus} from '../main.js';
 
-  import {getAllExercises} from '../assets/functions/myfunctions.js'
-
-
   export default {
     name: 'AppContent',
     data: function() {
@@ -45,7 +42,6 @@
 
         ContentEventBus.$on('reStartExercises', () => {
           Object.assign(vm.$data, vm.$options.data());
-          getAllExercises();
         });
     },
     components: {

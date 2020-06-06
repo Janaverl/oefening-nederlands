@@ -70,14 +70,13 @@
 
   import {shuffleArray, getPercentage, isLastExercise, hasEqualCleanString} from '../../assets/functions/myfunctions.js'
 
-  import jsonExercises from '../../assets/data/exercises.json';
-  import jsonAppContent from '../../assets/data/appContent.json';
+  import {getBtnText, getExercises} from '../../assets/functions/dataHandler.js'
 
   export default {
     name: 'Exercises',
     data: function() {
       return {
-        exercises: shuffleArray(jsonExercises),
+        exercises: shuffleArray(getExercises()),
         progress: {
           i: 0,
           current: 1,
@@ -90,12 +89,11 @@
         isCorrectAnswer: false,
         isLastOne: false,
         btnText: null,
-        btnTexts: jsonAppContent.btn,
       };
     },
     methods: {
-      changeBtnTxt(newText) {
-        this.btnText = newText;
+      setBtnText(action) {
+        this.btnText = getBtnText(action);
       },
       handleAnswer() {
         if(hasEqualCleanString(this.answer, this.exercises[this.progress.i].solution)){
@@ -106,7 +104,6 @@
       goToNextExercise() {
         this.progress.i++;
         this.resetAnswer();
-        this.changeBtnTxt(this.btnTexts.textCheck);
       },
       resetAnswer() {
         this.answer = '';
@@ -116,7 +113,7 @@
     mounted() {
       this.progress.total = this.exercises.length;
       this.progress.track = getPercentage(this.progress.current, this.progress.total);
-      this.btnText = this.btnTexts.textCheck
+      this.setBtnText("textCheck");
     },
     watch: {
       'progress.i'(newIndex) {
@@ -129,6 +126,7 @@
       },
       isAnswering (isAnswering) {
         if(isAnswering) {
+          this.setBtnText("textCheck");
           this.goToNextExercise();
           return;
         }
@@ -136,11 +134,11 @@
         this.handleAnswer();
 
         if(this.isLastOne){
-          this.changeBtnTxt(this.btnTexts.textFinish);
+          this.setBtnText("textFinish");
           return;
         }
 
-        this.changeBtnTxt(this.btnTexts.textNext);
+        this.setBtnText("textNext");
         
       }
     },

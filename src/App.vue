@@ -20,14 +20,14 @@
   import AppContent from './components/AppContent.vue'
   import AppFooter from './components/AppFooter.vue'
 
-  import appInformation from './assets/data/appInformation.json';
+  import {getAppTitle, getAppCreatedBy} from './assets/functions/dataHandler.js';
 
   export default {
     name: 'App',
     data: function() {
         return {
-          appTitle: appInformation.title,
-          createdBy: appInformation.createdBy
+          appTitle: getAppTitle(),
+          createdBy: getAppCreatedBy()
         };
     },
     components: {
