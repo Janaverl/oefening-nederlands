@@ -39,7 +39,7 @@
         ContentEventBus.$on('showScoreBoard', (data) => {
           vm.lastExercise.score = data.score;
           vm.lastExercise.total = data.total;
-          vm.lastExercise.percentage = (data.score / data.total) * 100;
+          vm.lastExercise.percentage = Math.round((data.score / data.total) * 100);
           vm.playing = false;
         });
 
