@@ -66,6 +66,7 @@
   import ExercisesSollution from './ExercisesSollution';
 
   import {ExerciseEventBus} from '../../main.js';
+  import {ScoreEventBus} from '../../main.js';
 
   import jsonExercises from '../../assets/data/exercises.json';
   import jsonAppContent from '../../assets/data/appContent.json';
@@ -133,9 +134,6 @@
         resetAnswer() {
           this.answer.answer = '';
         },
-        showScore() {
-          console.log(this.progress.score);
-        }
       },
       mounted() {
         this.progress.total = this.exercises.length;
@@ -145,15 +143,14 @@
         'progress.i'(newIndex) {
           this.progress.current = newIndex + 1;
           this.progress.track = this.setTrack(this.progress.current, this.progress.total);
+
           const total = this.progress.total;
           const current = this.progress.current;
           this.answer.isLastOne = this.isLastExercise(total, current);
-          console.log('current state:')
-          console.log(this.answer.isLastOne);
-          console.log(this.progress.current);
         },
         isAnswering (isAnswering) {
           if(this.answer.isLastOne){
+            console.log("the last one");
             this.btnText = this.btnTexts.textFinish;
             return;
           }
@@ -168,8 +165,8 @@
         const vm = this;
         ExerciseEventBus.$on('next', () => {
           vm.isAnswering = !vm.isAnswering;
-          if(vm.answer.isLastOne){
-            this.showScore();
+          if(vm.answer.isLastOne && vm.isAnswering){
+            ScoreEventBus.$emit('showScoreBoard', vm.progress);
             return;
           }
         });
