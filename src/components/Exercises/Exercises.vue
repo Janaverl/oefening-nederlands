@@ -102,7 +102,6 @@
           this.isCorrectAnswer = true;
           this.progress.score++;
         }
-        this.changeBtnTxt(this.btnTexts.textNext);
       },
       goToNextExercise() {
         this.progress.i++;
@@ -133,12 +132,16 @@
           this.goToNextExercise();
           return;
         }
+
+        this.handleAnswer();
+
         if(this.isLastOne){
-          this.btnText = this.btnTexts.textFinish;
+          this.changeBtnTxt(this.btnTexts.textFinish);
           return;
         }
+
+        this.changeBtnTxt(this.btnTexts.textNext);
         
-        this.handleAnswer();
       }
     },
     created() {
