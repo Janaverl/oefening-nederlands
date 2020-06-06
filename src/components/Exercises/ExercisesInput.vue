@@ -5,7 +5,7 @@
             class="form-control"
             placeholder="jouw oplossing hier"
             v-model="myAnswer"
-            @keypress="$emit('update:inputData', myAnswer);"
+            @input="$emit('update:inputData', myAnswer);"
         >
     </div>
 </template>
