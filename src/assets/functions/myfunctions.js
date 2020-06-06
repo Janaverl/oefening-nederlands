@@ -20,8 +20,41 @@ function isLastExercise(currentNr, total){
     return false;
 }
 
+function getDate(date) {
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0');
+    var yyyy = date.getFullYear();
+
+    return mm + '/' + dd + '/' + yyyy;
+}
+
+function saveLastGame(lastGame){
+    let allGames = [];
+
+    if (localStorage.allGames) {
+        var jsonString = localStorage.getItem("allGames");
+        allGames = JSON.parse(jsonString);
+    }
+    lastGame.date = getDate(lastGame.date);
+    allGames.unshift(lastGame);
+
+    localStorage.setItem("allGames", JSON.stringify(allGames));
+}
+
+function getAllGames(){
+    if (localStorage.allGames) {
+        var jsonString = localStorage.getItem("allGames");
+        const allGames = JSON.parse(jsonString);
+        console.log(allGames);
+        return allGames;
+    }
+    return [];
+}
+
 export {
     shuffleArray,
     getPercentage,
-    isLastExercise
+    isLastExercise,
+    saveLastGame,
+    getAllGames
 }
