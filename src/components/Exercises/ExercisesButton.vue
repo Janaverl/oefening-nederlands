@@ -1,12 +1,26 @@
 <template>
-    <button class="btn btn-primary">
-        Is het juist?
+    <button
+        class="btn btn-primary"
+        @click="btnConfirm"
+    >
+        {{btnText}}
     </button>
 </template>
 
 <script>
+    import {ExerciseEventBus} from '../../main.js';
+    
     export default {
         name: 'ExercisesButton',
+        props: {
+            btnText: String,
+            btnAction: String
+        },
+        methods: {
+            btnConfirm() {
+                ExerciseEventBus.$emit('next');
+            }
+        }
     }
 </script>
 
