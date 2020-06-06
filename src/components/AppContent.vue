@@ -5,9 +5,7 @@
       <exercises v-if="playing"
       ></exercises> 
       <score v-else
-        :score=lastExercise.score
-        :total=lastExercise.total
-        :percentage=lastExercise.percentage
+        :lastExercise=lastExercise
       ></score> 
     </div>
 </template>
@@ -18,7 +16,7 @@
 
   import {ContentEventBus} from '../main.js';
 
-  import {saveLastExercise, getAllExercises} from '../assets/functions/myfunctions.js'
+  import {getAllExercises} from '../assets/functions/myfunctions.js'
 
 
   export default {
@@ -46,7 +44,6 @@
         });
 
         ContentEventBus.$on('reStartExercises', () => {
-          saveLastExercise(vm.lastExercise);
           Object.assign(vm.$data, vm.$options.data());
           getAllExercises();
         });

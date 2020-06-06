@@ -12,7 +12,7 @@
             :style="{'minHeight': '200px'}"
           >
             <h5 class="card-title">
-                Je behaalde {{score}} op {{ total }} ({{ percentage}}%)
+                Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{ lastExercise.percentage}}%)
             </h5>
 
             <p>{{text}}</p>
@@ -41,6 +41,8 @@
 <script>
     import {ContentEventBus} from '../../main.js';
 
+    import {saveLastExercise} from '../../assets/functions/myfunctions.js'
+
     import jsonAppContent from '../../assets/data/appContent.json';
 
 
@@ -55,9 +57,7 @@
             };
         },
         props: {
-            score: Number,
-            total: Number,
-            percentage: Number
+            lastExercise: Object
         },
         methods: {
             reStart() {
@@ -65,11 +65,13 @@
             }
         },
         mounted() {
-            console.log(this.scoreTexts);
-            if(this.percentage == 100) {
+            
+            saveLastExercise(this.lastExercise);
+
+            if(this.lastExercise.percentage == 100) {
                 this.title = this.scoreTexts.high.title;
                 this.text = this.scoreTexts.high.message;
-            } else if (this.percentage >= 50) {
+            } else if (this.lastExercise.percentage >= 50) {
                 this.title = this.scoreTexts.medium.title;
                 this.text = this.scoreTexts.medium.message; 
             } else {
