@@ -10,6 +10,9 @@ function shuffleArray(array) {
 }
 
 function hasEqualCleanString(myAnswer, answer) {
+    if(!myAnswer){
+        return false;
+    }
     if(myAnswer.toLowerCase().trim() === answer.toLowerCase().trim()) {
         return true;
     }
