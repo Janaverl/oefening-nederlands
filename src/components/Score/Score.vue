@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            Je behaalde:%)
+            {{title}}
           </div>
 
           <div
@@ -12,8 +12,10 @@
             :style="{'minHeight': '200px'}"
           >
             <h5 class="card-title">
-                {{score}} op {{ total }} ({{ percentage}}%)
+                Je behaalde {{score}} op {{ total }} ({{ percentage}}%)
             </h5>
+
+            <p>{{text}}</p>
         
           </div>
 
@@ -30,14 +32,36 @@
 </template>
 
 <script>
-    export default {
-        name: 'Score',
-        props: {
-            score: Number,
-            total: Number,
-            percentage: Number
+  import jsonAppContent from '../../assets/data/appContent.json';
+
+export default {
+    name: 'Score',
+    data: function() {
+        return{
+            scoreTexts: jsonAppContent.score,
+            title: null,
+            text: null
+        };
+    },
+    props: {
+        score: Number,
+        total: Number,
+        percentage: Number
+    },
+    mounted() {
+        console.log(this.scoreTexts);
+        if(this.percentage == 100) {
+            this.title = this.scoreTexts.high.title;
+            this.text = this.scoreTexts.high.message;
+        } else if (this.percentage >= 50) {
+            this.title = this.scoreTexts.medium.title;
+            this.text = this.scoreTexts.medium.message; 
+        } else {
+            this.title = this.scoreTexts.low.title;
+            this.text = this.scoreTexts.low.message;
         }
-    }
+    },
+}
 </script>
 
 <style>

@@ -23,13 +23,13 @@
             </h5>
 
             <exercises-input v-if="isAnswering"
-              :inputData.sync="answer.answer"
+              :inputData.sync="answer"
             ></exercises-input>
             
-            <exercises-sollution v-else
-              :myAnswer="answer.answer"
+            <exercises-solution v-else
+              :myAnswer="answer"
               :correctAnswer="exercises[progress.i].solution"
-            ></exercises-sollution>
+            ></exercises-solution>
             
             <exercises-button
               :btnText = btnText
@@ -63,134 +63,114 @@
 <script>
   import ExercisesInput from './ExercisesInput';
   import ExercisesButton from './ExercisesButton';
-  import ExercisesSollution from './ExercisesSollution';
+  import ExercisesSolution from './ExercisesSolution';
 
   import {ExerciseEventBus} from '../../main.js';
   import {ScoreEventBus} from '../../main.js';
 
+  import {shuffleArray, getPercentage, isLastExercise} from '../../assets/functions/myfunctions.js'
+
   import jsonExercises from '../../assets/data/exercises.json';
   import jsonAppContent from '../../assets/data/appContent.json';
 
-    export default {
-        name: 'Exercises',
-          data: function() {
-            function shuffleArray(array) {
-              for (var i = array.length - 1; i > 0; i--) {
-                  var j = Math.floor(Math.random() * (i + 1));
-                  var temp = array[i];
-                  array[i] = array[j];
-                  array[j] = temp;
-              }
-            return array;
-          }
-          return {
-            exercises: shuffleArray(jsonExercises),
-            progress: {
-              i: 0,
-              current: 1,
-              total: null,
-              track: null,
-              score: 0
-            },
-            isAnswering:  true,
-            showScore: false,
-            answer: {
-              answer: null,
-              isCorrect: false,
-              isLastOne: false
-            },
-            btnTexts: jsonAppContent.btn,
-            btnText: jsonAppContent.btn.textCheck
-          };
+  export default {
+    name: 'Exercises',
+    data: function() {
+      return {
+        exercises: shuffleArray(jsonExercises),
+        progress: {
+          i: 0,
+          current: 1,
+          total: null,
+          track: null,
+          score: 0
+        },
+        isAnswering:  true,
+        answer: null,
+        isCorrectAnswer: false,
+        isLastOne: false,
+        btnText: null,
+        btnTexts: jsonAppContent.btn,
+      };
+    },
+    methods: {
+      changeBtnTxt(newText) {
+        this.btnText = newText;
       },
-      methods: {
-        setTrack(current, total) {
-          return ((current / total)*100);
-        },
-        isAnswerCorrect(answer, correctAnswer) {
-          if(answer == correctAnswer) {
-            return true;
-          }
-          return false;
-        },
-        isLastExercise(currentNr, total){
-          if(currentNr == total){
-            return true;
-          }
-          return false;
-        },
-        handleAnswer() {
-          this.btnText = this.btnTexts.textNext;
-          this.answer.isCorrect = this.isAnswerCorrect(this.answer.answer, this.exercises[this.progress.i].solution);
-          if(this.answer.isCorrect){
-            this.progress.score++;
-          }
-        },
-        goToNextExercise() {
-          this.progress.i++;
-          this.resetAnswer();
-          this.btnText = this.btnTexts.textCheck;
-        },
-        resetAnswer() {
-          this.answer.answer = '';
-        },
+      handleAnswer() {
+        if(this.answer == this.exercises[this.progress.i].solution){
+          this.isCorrectAnswer = true;
+          this.progress.score++;
+        }
+        this.changeBtnTxt(this.btnTexts.textNext);
       },
-      mounted() {
-        this.progress.total = this.exercises.length;
-        this.progress.track = this.setTrack(this.progress.current, this.progress.total);
+      goToNextExercise() {
+        this.progress.i++;
+        this.resetAnswer();
+        this.changeBtnTxt(this.btnTexts.textCheck);
       },
-      watch: {
-        'progress.i'(newIndex) {
-          this.progress.current = newIndex + 1;
-          this.progress.track = this.setTrack(this.progress.current, this.progress.total);
+      resetAnswer() {
+        this.answer = '';
+        this.isCorrectAnswer= false;
+      },
+    },
+    mounted() {
+      this.progress.total = this.exercises.length;
+      this.progress.track = getPercentage(this.progress.current, this.progress.total);
+      this.btnText = this.btnTexts.textCheck
+    },
+    watch: {
+      'progress.i'(newIndex) {
+        this.progress.current = newIndex + 1;
 
-          const total = this.progress.total;
-          const current = this.progress.current;
-          this.answer.isLastOne = this.isLastExercise(total, current);
-        },
-        isAnswering (isAnswering) {
-          if(this.answer.isLastOne){
-            console.log("the last one");
-            this.btnText = this.btnTexts.textFinish;
-            return;
-          }
-          if(!isAnswering){
-            this.handleAnswer();
-            return;
-          }
+        const current = this.progress.current;
+        const total = this.progress.total;
+        this.progress.track = getPercentage(current, total);
+        this.isLastOne = isLastExercise(current, total);
+      },
+      isAnswering (isAnswering) {
+        if(isAnswering) {
           this.goToNextExercise();
+          return;
         }
-      },
-      created() {
-        const vm = this;
-        ExerciseEventBus.$on('next', () => {
-          vm.isAnswering = !vm.isAnswering;
-          if(vm.answer.isLastOne && vm.isAnswering){
-            ScoreEventBus.$emit('showScoreBoard', vm.progress);
-            return;
-          }
-        });
-      },
-      computed: {
-        setBorder() {
-          if(this.isAnswering){
-            return;
-          }
-          return this.answer.isCorrect ? 'border-success' : 'border-danger';
-        },
-        setBackground() {
-          if(this.isAnswering){
-            return;
-          }
-          return this.answer.isCorrect ? 'bg-success' : 'bg-danger';
+        if(this.isLastOne){
+          this.btnText = this.btnTexts.textFinish;
+          return;
         }
-      },
-      components: {
-          ExercisesInput,
-          ExercisesButton,
-          ExercisesSollution
+        
+        this.handleAnswer();
       }
+    },
+    created() {
+      const vm = this;
+      ExerciseEventBus.$on('next', () => {
+        vm.isAnswering = !vm.isAnswering;
+        if(vm.isLastOne && vm.isAnswering){
+          ScoreEventBus.$emit('showScoreBoard', vm.progress);
+          return;
+        }
+      });
+    },
+    computed: {
+      setBorder() {
+        if(this.isAnswering){
+          return;
+        }
+        return this.isCorrectAnswer ? 'border-success' : 'border-danger';
+      },
+      setBackground() {
+        if(this.isAnswering){
+          return;
+        }
+        return this.isCorrectAnswer ? 'bg-success' : 'bg-danger';
+      }
+    },
+    components: {
+        ExercisesInput,
+        ExercisesButton,
+        ExercisesSolution
     }
+  }
 </script>
 
 <style>

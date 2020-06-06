@@ -11,8 +11,6 @@
 </template>
 
 <script>
-    // import {ExerciseEventBus} from '../../main.js';
-
     export default {
         name: 'ExercisesInput',
         data: function() {

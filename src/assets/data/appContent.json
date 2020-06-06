@@ -3,5 +3,25 @@
         "textCheck": "Is het juist?",
         "textNext": "volgende",
         "textFinish": "Toon me mijn score"
+    },
+    "score": {
+        "high":
+        {
+            "name": "high",
+            "title": "Perfect!",
+            "message": "Je behaalde de maximale score."
+        },
+        "medium":
+        {
+            "name": "medium",
+            "title": "Goed zo!",
+            "message": "Je behaalde een goede score. Wil je nog eens proberen?"
+        },
+        "low":
+        {
+            "name": "low",
+            "title": "Kan beter.",
+            "message": "Wil je nog eens proberen?"
+        }
     }
 }

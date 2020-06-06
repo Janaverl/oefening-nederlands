@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: 'ExercisesSollution',
+        name: 'ExercisesSolution',
         props: {
             myAnswer: String,
             correctAnswer: String
