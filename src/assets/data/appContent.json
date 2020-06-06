@@ -2,7 +2,8 @@
     "btn": {
         "textCheck": "Is het juist?",
         "textNext": "volgende",
-        "textFinish": "Toon me mijn score"
+        "textFinish": "Toon me mijn score",
+        "textReplay": "Start opnieuw"
     },
     "score": {
         "high":

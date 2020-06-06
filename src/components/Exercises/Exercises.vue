@@ -66,7 +66,7 @@
   import ExercisesSolution from './ExercisesSolution';
 
   import {ExerciseEventBus} from '../../main.js';
-  import {ScoreEventBus} from '../../main.js';
+  import {ContentEventBus} from '../../main.js';
 
   import {shuffleArray, getPercentage, isLastExercise} from '../../assets/functions/myfunctions.js'
 
@@ -146,9 +146,12 @@
       ExerciseEventBus.$on('next', () => {
         vm.isAnswering = !vm.isAnswering;
         if(vm.isLastOne && vm.isAnswering){
-          ScoreEventBus.$emit('showScoreBoard', vm.progress);
+          ContentEventBus.$emit('showScoreBoard', vm.progress);
           return;
         }
+      });
+      ContentEventBus.$on('reStartExercises', () => {
+          Object.assign(vm.$data, vm.$options.data());
       });
     },
     computed: {

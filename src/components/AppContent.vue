@@ -2,11 +2,12 @@
     <div
       class="container"
     >
-      <exercises v-if="playing"></exercises> 
+      <exercises v-if="playing"
+      ></exercises> 
       <score v-else
-        :score=endScore.score
-        :total=endScore.total
-        :percentage=endScore.percentage
+        :score=lastGame.score
+        :total=lastGame.total
+        :percentage=lastGame.percentage
       ></score> 
     </div>
 </template>
@@ -15,7 +16,7 @@
   import Exercises from './Exercises/Exercises.vue'
   import Score from './Score/Score.vue'
 
-  import {ScoreEventBus} from '../main.js';
+  import {ContentEventBus} from '../main.js';
 
   export default {
     name: 'AppContent',
@@ -31,11 +32,16 @@
     },
     created() {
         const vm = this;
-        ScoreEventBus.$on('showScoreBoard', (data) => {
-          this.endScore.score = data.score;
-          this.endScore.total = data.total;
-          this.endScore.percentage = (data.score / data.total) * 100;
+
+        ContentEventBus.$on('showScoreBoard', (data) => {
+          vm.endScore.score = data.score;
+          vm.endScore.total = data.total;
+          vm.endScore.percentage = (data.score / data.total) * 100;
           vm.playing = false;
+        });
+
+        ContentEventBus.$on('reStartExercises', () => {
+          Object.assign(vm.$data, vm.$options.data());
         });
     },
     components: {
