@@ -9,6 +9,13 @@ function shuffleArray(array) {
     return array;
 }
 
+function hasEqualCleanString(myAnswer, answer) {
+    if(myAnswer.toLowerCase().trim() == answer.toLowerCase().trim()) {
+        return true;
+    }
+    return false;
+}
+
 function getPercentage(current, total) {
     return ((current / total)*100);
 }
@@ -56,5 +63,6 @@ export {
     getPercentage,
     isLastExercise,
     saveLastExercise,
-    getAllExercises
+    getAllExercises,
+    hasEqualCleanString
 }

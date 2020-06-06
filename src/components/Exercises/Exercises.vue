@@ -68,7 +68,7 @@
   import {ExerciseEventBus} from '../../main.js';
   import {ContentEventBus} from '../../main.js';
 
-  import {shuffleArray, getPercentage, isLastExercise} from '../../assets/functions/myfunctions.js'
+  import {shuffleArray, getPercentage, isLastExercise, hasEqualCleanString} from '../../assets/functions/myfunctions.js'
 
   import jsonExercises from '../../assets/data/exercises.json';
   import jsonAppContent from '../../assets/data/appContent.json';
@@ -98,7 +98,7 @@
         this.btnText = newText;
       },
       handleAnswer() {
-        if(this.answer == this.exercises[this.progress.i].solution){
+        if(hasEqualCleanString(this.answer, this.exercises[this.progress.i].solution)){
           this.isCorrectAnswer = true;
           this.progress.score++;
         }
