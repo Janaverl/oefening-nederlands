@@ -28,25 +28,25 @@ function getDate(date) {
     return mm + '/' + dd + '/' + yyyy;
 }
 
-function saveLastGame(lastGame){
-    let allGames = [];
+function saveLastExercise(lastExercise){
+    let allExercises = [];
 
-    if (localStorage.allGames) {
-        var jsonString = localStorage.getItem("allGames");
-        allGames = JSON.parse(jsonString);
+    if (localStorage.allExercises) {
+        var jsonString = localStorage.getItem("allExercises");
+        allExercises = JSON.parse(jsonString);
     }
-    lastGame.date = getDate(lastGame.date);
-    allGames.unshift(lastGame);
+    lastExercise.date = getDate(lastExercise.date);
+    allExercises.unshift(lastExercise);
 
-    localStorage.setItem("allGames", JSON.stringify(allGames));
+    localStorage.setItem("allExercises", JSON.stringify(allExercises));
 }
 
-function getAllGames(){
-    if (localStorage.allGames) {
-        var jsonString = localStorage.getItem("allGames");
-        const allGames = JSON.parse(jsonString);
-        console.log(allGames);
-        return allGames;
+function getAllExercises(){
+    if (localStorage.allExercises) {
+        var jsonString = localStorage.getItem("allExercises");
+        const allExercises = JSON.parse(jsonString);
+        console.log(allExercises);
+        return allExercises;
     }
     return [];
 }
@@ -55,6 +55,6 @@ export {
     shuffleArray,
     getPercentage,
     isLastExercise,
-    saveLastGame,
-    getAllGames
+    saveLastExercise,
+    getAllExercises
 }

@@ -5,9 +5,9 @@
       <exercises v-if="playing"
       ></exercises> 
       <score v-else
-        :score=lastGame.score
-        :total=lastGame.total
-        :percentage=lastGame.percentage
+        :score=lastExercise.score
+        :total=lastExercise.total
+        :percentage=lastExercise.percentage
       ></score> 
     </div>
 </template>
@@ -18,7 +18,7 @@
 
   import {ContentEventBus} from '../main.js';
 
-  import {saveLastGame, getAllGames} from '../assets/functions/myfunctions.js'
+  import {saveLastExercise, getAllExercises} from '../assets/functions/myfunctions.js'
 
 
   export default {
@@ -27,7 +27,7 @@
       const today = new Date();
       return {
         playing: true,
-        lastGame: {
+        lastExercise: {
           date: today,
           score: null,
           total: null,
@@ -39,16 +39,16 @@
         const vm = this;
 
         ContentEventBus.$on('showScoreBoard', (data) => {
-          vm.lastGame.score = data.score;
-          vm.lastGame.total = data.total;
-          vm.lastGame.percentage = (data.score / data.total) * 100;
+          vm.lastExercise.score = data.score;
+          vm.lastExercise.total = data.total;
+          vm.lastExercise.percentage = (data.score / data.total) * 100;
           vm.playing = false;
         });
 
         ContentEventBus.$on('reStartExercises', () => {
-          saveLastGame(vm.lastGame);
+          saveLastExercise(vm.lastExercise);
           Object.assign(vm.$data, vm.$options.data());
-          getAllGames();
+          getAllExercises();
         });
     },
     components: {
