@@ -58,7 +58,6 @@
         name: 'Scores',
         data: function() {
             const data = getAllExercisesDone();
-            console.log(data);
             return{
                 allExercises: data,
             }

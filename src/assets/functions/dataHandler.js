@@ -57,10 +57,8 @@ function getAllExercisesDone(){
     if (localStorage.allExercises) {
         var jsonString = localStorage.getItem("allExercises");
         const allExercises = JSON.parse(jsonString);
-        console.log(allExercises);
         return allExercises;
     }
-    console.log("none found");
     return [];
 }
 
@@ -71,7 +69,6 @@ function postExerciseResult(exercise){
         if(!allExercises[i].id){
             allExercises.splice(i,1)
         }
-        console.log(allExercises);
     }
 
     exercise.date = getDate(exercise.date);

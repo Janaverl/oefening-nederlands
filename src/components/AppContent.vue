@@ -42,8 +42,6 @@
         const vm = this;
 
         ContentEventBus.$on('showScoreBoard', (data) => {
-          console.log('data in showScoreBoard :::')
-          console.log(data);
           vm.lastExercise = data;
           vm.playing = false
         });
