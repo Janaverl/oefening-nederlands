@@ -191,6 +191,9 @@
       });
       ContentEventBus.$on('reStartExercises', () => {
           Object.assign(vm.$data, vm.$options.data());
+          this.progress.total = this.exercises.length;
+          this.progress.track = getPercentage(this.progress.current, this.progress.total);
+          this.setBtnText("textCheck");
       });
     },
     computed: {

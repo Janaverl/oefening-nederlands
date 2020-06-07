@@ -29,6 +29,7 @@
                 :class="['row',
                   'border',
                 ]"
+                @click="showDetails(exercise)"
               >
                 <p class="col-4">{{exercise.date}}</p>
                 <p class="col-4">{{exercise.description.short}}</p>
@@ -53,6 +54,8 @@
 
 <script>
     import {getAllExercisesDone} from '../../assets/functions/dataHandler.js'
+    
+    import {ContentEventBus} from '../../main.js';
 
     export default {
         name: 'Scores',
@@ -60,6 +63,11 @@
             const data = getAllExercisesDone();
             return{
                 allExercises: data,
+            }
+        },
+        methods: {
+            showDetails(exercise) {
+                ContentEventBus.$emit('showDetailsExercise', exercise);
             }
         }
     }

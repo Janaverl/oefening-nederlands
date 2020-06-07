@@ -44,7 +44,9 @@
         ContentEventBus.$on('showScoreBoard', (data) => {
           vm.lastExercise = data;
           vm.playing = false
+          vm.showAllResults = false
         });
+
         ContentEventBus.$on('openScoreBoard', () => {
           vm.playing = false,
           vm.showAllResults = true
@@ -52,6 +54,13 @@
 
         ContentEventBus.$on('reStartExercises', () => {
           Object.assign(vm.$data, vm.$options.data());
+        });
+        
+        ContentEventBus.$on('showDetailsExercise', (data) => {
+          console.log(data);
+          vm.lastExercise = data;
+          vm.playing = false
+          vm.showAllResults = false
         });
     },
     components: {
