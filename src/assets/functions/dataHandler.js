@@ -57,8 +57,10 @@ function getAllExercisesDone(){
     if (localStorage.allExercises) {
         var jsonString = localStorage.getItem("allExercises");
         const allExercises = JSON.parse(jsonString);
+        console.log(allExercises);
         return allExercises;
     }
+    console.log("none found");
     return [];
 }
 
@@ -86,6 +88,7 @@ export {
     getScoreMessage,
     getExercises,
     getDescription,
-    postExerciseResult
+    postExerciseResult,
+    getAllExercisesDone
 }
 
