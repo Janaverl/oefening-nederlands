@@ -16,10 +16,10 @@
             v-if="playing"
           ></exercises>
 
-          <score
+          <scores-detail
             v-else-if="!showAllResults"
             :lastExercise=lastExercise
-          ></score>
+          ></scores-detail>
 
           <scores
             v-else
@@ -34,7 +34,7 @@
 <script>
   import Exercises from './Exercises/Exercises.vue'
   import Scores from './Score/Scores.vue'
-  import Score from './Score/Score.vue'
+  import ScoresDetail from './Score/ScoresDetail.vue'
 
   import {ContentEventBus} from '../main.js';
 
@@ -57,12 +57,6 @@
     created() {
         const vm = this;
 
-        ContentEventBus.$on('showScoreBoard', (data) => {
-          vm.lastExercise = data;
-          vm.playing = false
-          vm.showAllResults = false
-        });
-
         ContentEventBus.$on('openScoreBoard', () => {
           vm.playing = false,
           vm.showAllResults = true
@@ -82,7 +76,7 @@
     components: {
       Exercises,
       Scores,
-      Score
+      ScoresDetail
     }
   }
 </script>

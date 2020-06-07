@@ -167,7 +167,7 @@
         if(vm.isLastOne && vm.isAnswering){
           const result = vm.createResultData(vm);
           postExerciseResult(result);
-          ContentEventBus.$emit('showScoreBoard', result);
+          ContentEventBus.$emit('showDetailsExercise', result);
           return;
         }
       });
