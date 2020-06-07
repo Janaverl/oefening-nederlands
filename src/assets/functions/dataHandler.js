@@ -1,6 +1,7 @@
 import jsonAppInformation from '../data/appInformation.json';
 import jsonAppContent from '../data/appContent.json';
 import jsonExercises from '../data/exercises.json';
+import jsonExerciseTypes from '../data/exerciseTypes.json';
 
 function getAppTitle() {
     return jsonAppInformation.title;
@@ -22,8 +23,24 @@ function getScoreMessage(level) {
     return jsonAppContent.score[level]['message'];
 }
 
-function getExercises() {
-    return jsonExercises;
+function getDescription(id) {
+    const filteredList = jsonExerciseTypes.filter(function(item){
+        return item.id == id;         
+    })
+    return filteredList[0]['description'];
+}
+
+function getExercises(id) {
+    const filteredList = jsonExercises.filter(function(item){
+        return item.exerciseTypeId == id;         
+    })
+
+    const description = getDescription(id);
+    for (let i=0; i<filteredList.length; i++) {
+        filteredList[i]['exerciseType'] = description;
+    }
+
+    return filteredList;
 }
 
 function getDate(date) {

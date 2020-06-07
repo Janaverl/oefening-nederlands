@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "short": "participium",
+        "description": "typ het participium (voltooid deelwoord)"
+    },
+    {
+        "id": 2,
+        "short": "voorvoegsel",
+        "description": "typ het juiste voorvoegsel"
+    }
+]

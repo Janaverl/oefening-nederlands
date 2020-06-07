@@ -1,101 +1,106 @@
 [
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Schillen",
         "solution": "geschild"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 2,
+        "exercise": "test",
+        "solution": "test"
+    },
+    {
+        "exerciseTypeId": 1,
         "exercise": "Snijden",
         "solution": "gesneden"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Wassen",
         "solution": "gewassen"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Roeren",
         "solution": "geroerd"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Bakken",
         "solution": "gebakken"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Koken",
         "solution": "gekookt"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Proeven",
         "solution": "geproefd"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Gieten",
         "solution": "gegoten"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Wegen",
         "solution": "gewogen"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Stoven",
         "solution": "gestoofd"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Toevoegen",
         "solution": "toegevoegd"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Uitscheppen",
         "solution": "uitgeschept"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Afkoelen",
         "solution": "afgekoeld"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Pellen",
         "solution": "gepeld"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Kruiden",
         "solution": "gekruid"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Drinken",
         "solution": "gedronken"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Eten",
         "solution": "gegeten"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Afwassen",
         "solution": "afgewassen"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Mengen",
         "solution": "gemengd"
     },
     {
-        "exerciseType": "typ het participium (voltooid deelwoord)",
+        "exerciseTypeId": 1,
         "exercise": "Raspen",
         "solution": "geraspt"
     }

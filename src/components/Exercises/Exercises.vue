@@ -76,7 +76,7 @@
     name: 'Exercises',
     data: function() {
       return {
-        exercises: shuffleArray(getExercises()),
+        exercises: shuffleArray(getExercises(1)),
         progress: {
           i: 0,
           current: 1,

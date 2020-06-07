@@ -46,7 +46,7 @@
     getBtnText,
     getScoreTitle,
     getScoreMessage
-  } from '../../asstets/functions/dataHandler.js'
+  } from '../../assets/functions/dataHandler.js'
 
     export default {
         name: 'Score',
