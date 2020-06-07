@@ -47,8 +47,11 @@
   import ExercisesButton from './ExercisesButton';
   import ExercisesSolution from './ExercisesSolution';
 
-  import {ExerciseEventBus} from '../../main.js';
-  import {ContentEventBus} from '../../main.js';
+  import {
+    ExerciseEventBus,
+    ContentEventBus,
+    MarkUpEventBus
+  } from '../../main.js';
 
   import {
     shuffleArray,
@@ -68,6 +71,7 @@
     name: 'Exercises',
     data: function() {
       return {
+        colorTheme: 'secondary',
         exercises: shuffleArray(getExercises(1)),
         description: getDescription(1),
         progress: {
@@ -105,6 +109,9 @@
           this.isCorrectAnswer = true;
           this.progress.score++;
         }
+
+        this.colorTheme = this.isCorrectAnswer ? 'success' : 'danger';
+
         this.saveAnswer();
       },
       goToNextExercise() {
@@ -146,6 +153,7 @@
         if(isAnswering) {
           this.setBtnText("textCheck");
           this.goToNextExercise();
+          this.colorTheme = 'secondary';
           return;
         }
 
@@ -157,8 +165,12 @@
         }
 
         this.setBtnText("textNext");
-        
+      },
+
+      colorTheme(colorTheme) {
+        MarkUpEventBus.$emit('setColorTheme', colorTheme);
       }
+
     },
     created() {
       const vm = this;
@@ -177,20 +189,6 @@
           this.progress.track = getPercentage(this.progress.current, this.progress.total);
           this.setBtnText("textCheck");
       });
-    },
-    computed: {
-      setBorder() {
-        if(this.isAnswering){
-          return;
-        }
-        return this.isCorrectAnswer ? 'border-success' : 'border-danger';
-      },
-      setBackground() {
-        if(this.isAnswering){
-          return;
-        }
-        return this.isCorrectAnswer ? 'bg-success' : 'bg-danger';
-      }
     },
     components: {
         Card,

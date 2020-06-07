@@ -1,9 +1,10 @@
 <template>
     <div
-        class="card"
+        :class="['card', 'shadow', 'border-'+colorTheme]"
     >
         <div
         class="card-header"
+        :class="['bg-'+colorTheme]"
         >
             <slot name="header">
                 <span></span>
@@ -11,8 +12,8 @@
         </div>
 
         <div
-        class="card-body"
-        :style="{'minHeight': '200px'}"
+            class="card-body"
+            :style="{'minHeight': '200px'}"
         >
         <h5 class="card-title">
             <slot name="title">
@@ -28,6 +29,7 @@
 
         <div
             class="card-footer"
+            :class="['bg-'+colorTheme]"
             style="{'minHeight': '40px'}"
         >
 
@@ -40,9 +42,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'Card',
-  }
+    import {MarkUpEventBus} from '../../main.js';
+
+    export default {
+        name: 'Card',
+        data: function() {
+            return {
+                colorTheme: 'secondary',
+            }
+        },
+        created() {
+            const vm = this;
+
+            MarkUpEventBus.$on('setColorTheme', (theme) => {    
+                vm.colorTheme = theme;
+            });
+        }
+    }
 </script>
 
 <style>
