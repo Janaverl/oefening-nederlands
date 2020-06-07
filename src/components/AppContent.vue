@@ -1,18 +1,34 @@
 <template>
+  <div
+    class="container"
+  >
     <div
-      class="container"
+      class="mb-5"
     >
-      <exercises v-if="playing"
-      ></exercises>
+      <div
+        class="row justify-content-md-center"
+      >
+        <div
+          class="col-md-6"
+          >
 
-      <score v-else-if="!showAllResults"
-        :lastExercise=lastExercise
-      ></score>
+          <exercises
+            v-if="playing"
+          ></exercises>
 
-      <scores v-else
-      ></scores> 
+          <score
+            v-else-if="!showAllResults"
+            :lastExercise=lastExercise
+          ></score>
 
+          <scores
+            v-else
+          ></scores> 
+
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

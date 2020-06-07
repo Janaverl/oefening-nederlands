@@ -1,70 +1,54 @@
 <template>
-  <div class="mb-5">
-    <div class="row justify-content-md-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            <p>oefening: {{lastExercise.description.short}}</p>
-            <p>datum: {{lastExercise.date}}</p>
-            <p>resultaat: Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{lastExercise.percentage}}%)</p>
-          </div>
 
-          <div
-            class="card-body"
-            :style="{'minHeight': '200px'}"
-          >
-            <h5 class="card-title">
-                {{title}}
-            </h5>
+    <card>
+        <template v-slot:header>
+          <p>oefening: {{lastExercise.description.short}}</p>
+          <p>datum: {{lastExercise.date}}</p>
+          <p>resultaat: Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{lastExercise.percentage}}%)</p>
+        </template>
+        <template v-slot:title>
+          {{title}}
+        </template>
+        <template v-slot:body>
+          <p>{{message}}</p>
 
-            <p>{{message}}</p>
+      <button
+          class="btn btn-primary"
+          @click="reStart"
+      >
+          {{btnText}}
+      </button>
 
-            <button
-                class="btn btn-primary"
-                @click="reStart"
-            >
-                {{btnText}}
-            </button>
-
-            <div class="row border font-weight-bold mt-5">
-                <p class="col-4">opdracht</p>
-                <p class="col-4">jouw oplossing</p>
-                <p class="col-4">juiste oplossing</p>
-            </div>
-
-            <div
-              v-for="exercise in lastExercise.exercises"
-              :key="exercise.id"
-            >
-              <div
-                :class="['row',
-                  'border',
-                  {'text-success': exercise.isCorrect},
-                  {'text-danger': !exercise.isCorrect}
-                ]"
-              >
-                <p class="col-4">{{exercise.exercise}}</p>
-                <p class="col-4">{{exercise.answer}}</p>
-                <p class="col-4">{{exercise.solution}}</p>
-              </div>
-
-            </div>
-        
-          </div>
-
-          <div class="card-footer"
-            :style="{'minHeight': '40px'}"
-          >
-
-          </div>
-
-        </div>
+      <div class="row border font-weight-bold mt-5">
+          <p class="col-4">opdracht</p>
+          <p class="col-4">jouw oplossing</p>
+          <p class="col-4">juiste oplossing</p>
       </div>
-    </div>
-  </div>
+
+      <div
+        v-for="exercise in lastExercise.exercises"
+        :key="exercise.id"
+      >
+        <div
+          :class="['row',
+            'border',
+            {'text-success': exercise.isCorrect},
+            {'text-danger': !exercise.isCorrect}
+          ]"
+        >
+          <p class="col-4">{{exercise.exercise}}</p>
+          <p class="col-4">{{exercise.answer}}</p>
+          <p class="col-4">{{exercise.solution}}</p>
+        </div>
+
+      </div>
+        </template>
+    </card>
 </template>
 
 <script>
+  import Card from '../Reusable/Card.vue';
+
   import {ContentEventBus} from '../../main.js';
 
   import {
@@ -103,6 +87,9 @@
                 this.setText('low');
             }
         },
+        components: {
+            Card
+        }
     }
 </script>
 

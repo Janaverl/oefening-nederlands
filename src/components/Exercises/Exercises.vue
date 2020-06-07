@@ -1,66 +1,48 @@
 <template>
-  <div
-    class="mb-5"
-  >
-    <div class="row justify-content-md-center">
-      <div class="col-md-6">
-        <div
-          :class="['card', setBorder]"
-        >
-
-          <div
-            :class="['card-header', setBackground]"
-          >
-            {{description.long}}
-          </div>
-
-          <div
-            class="card-body"
-            :style="{'minHeight': '200px'}"
-          >
-            <h5 class="card-title">
-              {{exercises[progress.i].exercise}}
-            </h5>
-
-            <exercises-input v-if="isAnswering"
-              :inputData.sync="answer"
-            ></exercises-input>
-            
-            <exercises-solution v-else
-              :myAnswer="answer"
-              :correctAnswer="exercises[progress.i].solution"
-            ></exercises-solution>
-            
-            <exercises-button
-              :btnText = btnText
-            ></exercises-button>
+    <card>
         
-          </div>
+        <template v-slot:header>
+          {{description.long}}
+        </template>
 
-          <div
-            :class="['card-footer', setBackground]"
-            :style="{'minHeight': '40px'}"
+        <template v-slot:title>
+          {{exercises[progress.i].exercise}}
+        </template>
+
+        <template v-slot:body>
+          <exercises-input v-if="isAnswering"
+            :inputData.sync="answer"
+          ></exercises-input>
+          
+          <exercises-solution v-else
+            :myAnswer="answer"
+            :correctAnswer="exercises[progress.i].solution"
+          ></exercises-solution>
+          
+          <exercises-button
+            :btnText = btnText
+          ></exercises-button>
+        </template>
+
+        <template v-slot:footer>
+          <div v-if="isAnswering"
+            class="progress text-dark"
           >
-            <div v-if="isAnswering"
-              class="progress text-dark"
+            <div
+              class="progress-bar"
+              role="progressbar"
+              :style="{'width': progress.track +'%'}"
             >
-              <div
-                class="progress-bar"
-                role="progressbar"
-                :style="{'width': progress.track +'%'}"
-              >
-                {{progress.current}} van {{progress.total}}
-              </div>
+              {{progress.current}} van {{progress.total}}
             </div>
           </div>
+        </template>
 
-        </div>
-      </div>
-    </div>
-  </div>
+    </card>
 </template>
 
 <script>
+  import Card from '../Reusable/Card.vue';
   import ExercisesInput from './ExercisesInput';
   import ExercisesButton from './ExercisesButton';
   import ExercisesSolution from './ExercisesSolution';
@@ -211,6 +193,7 @@
       }
     },
     components: {
+        Card,
         ExercisesInput,
         ExercisesButton,
         ExercisesSolution
