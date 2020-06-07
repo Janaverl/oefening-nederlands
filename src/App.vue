@@ -5,7 +5,9 @@
       :appTitle = appTitle
     ></app-header>
 
-    <app-content></app-content>
+    <app-content
+      class="content"
+    ></app-content>
 
     <app-footer
       :name = createdBy.name
@@ -40,5 +42,15 @@
 
 <style lang="scss">
   @import './assets/scss/myBootstrap.scss';
+
+  #app {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  .content {
+    flex: 1;
+  }
 
 </style>

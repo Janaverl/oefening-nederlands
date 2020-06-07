@@ -1,6 +1,5 @@
 <template>
     <footer
-        class="page-footer font-small blue fixed-bottom"
     >
         <div
             class="text-center py-3"
