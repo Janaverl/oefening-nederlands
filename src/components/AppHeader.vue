@@ -1,6 +1,6 @@
 <template>
     <nav
-        class="navbar navbar-light bg-light mb-5"
+        class="navbar navbar-light bg-warning mb-5"
     >
         <span
             class="navbar-brand"

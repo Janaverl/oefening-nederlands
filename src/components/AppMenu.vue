@@ -1,6 +1,6 @@
 <template>
     <div 
-        class="menu"
+        class="menu bg-primary"
         @click="closeMenu()"
     >
 

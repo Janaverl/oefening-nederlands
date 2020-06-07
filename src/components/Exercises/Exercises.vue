@@ -25,7 +25,7 @@
         </template>
 
         <template v-slot:footer>
-          <div v-if="isAnswering"
+          <div
             class="progress text-dark"
           >
             <div

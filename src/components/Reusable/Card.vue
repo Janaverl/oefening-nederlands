@@ -61,5 +61,8 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .card-body{
+        position: relative;
+    }
 </style>

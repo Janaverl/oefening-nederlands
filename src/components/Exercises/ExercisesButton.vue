@@ -24,5 +24,9 @@
     }
 </script>
 
-<style>
+<style scoped>
+    button{
+        position: absolute;
+        bottom: 20px;
+    }
 </style>
