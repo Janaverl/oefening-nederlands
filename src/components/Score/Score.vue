@@ -4,7 +4,9 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            {{title}}
+            <p>oefening: {{lastExercise.description.short}}</p>
+            <p>datum: {{lastExercise.date}}</p>
+            <p>resultaat: Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{lastExercise.percentage}}%)</p>
           </div>
 
           <div
@@ -12,7 +14,7 @@
             :style="{'minHeight': '200px'}"
           >
             <h5 class="card-title">
-                Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{ lastExercise.percentage}}%)
+                {{title}}
             </h5>
 
             <p>{{message}}</p>
@@ -23,6 +25,30 @@
             >
                 {{btnText}}
             </button>
+
+            <div class="row border font-weight-bold mt-5">
+                <p class="col-4">opdracht</p>
+                <p class="col-4">jouw oplossing</p>
+                <p class="col-4">juiste oplossing</p>
+            </div>
+
+            <div
+              v-for="exercise in lastExercise.exercises"
+              :key="exercise.id"
+            >
+              <div
+                :class="['row',
+                  'border',
+                  {'text-success': exercise.isCorrect},
+                  {'text-danger': !exercise.isCorrect}
+                ]"
+              >
+                <p class="col-4">{{exercise.exercise}}</p>
+                <p class="col-4">{{exercise.answer}}</p>
+                <p class="col-4">{{exercise.solution}}</p>
+              </div>
+
+            </div>
         
           </div>
 
@@ -42,7 +68,6 @@
   import {ContentEventBus} from '../../main.js';
 
   import {
-    setLastExercise,
     getBtnText,
     getScoreTitle,
     getScoreMessage
@@ -70,8 +95,6 @@
             },
         },
         mounted() {
-            setLastExercise(this.lastExercise);
-
             if(this.lastExercise.percentage === 100) {
                 this.setText('high');
             } else if (this.lastExercise.percentage >= 50) {

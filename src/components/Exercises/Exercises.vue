@@ -11,7 +11,7 @@
           <div
             :class="['card-header', setBackground]"
           >
-            {{exercises[progress.i].exerciseType}}
+            {{description.long}}
           </div>
 
           <div
@@ -68,15 +68,26 @@
   import {ExerciseEventBus} from '../../main.js';
   import {ContentEventBus} from '../../main.js';
 
-  import {shuffleArray, getPercentage, isLastExercise, hasEqualCleanString} from '../../assets/functions/myfunctions.js'
+  import {
+    shuffleArray,
+    getPercentage,
+    isLastExercise,
+    hasEqualCleanString
+  } from '../../assets/functions/myfunctions.js'
 
-  import {getBtnText, getExercises} from '../../assets/functions/dataHandler.js'
+  import {
+    postExerciseResult,
+    getBtnText,
+    getExercises,
+    getDescription
+  } from '../../assets/functions/dataHandler.js'
 
   export default {
     name: 'Exercises',
     data: function() {
       return {
         exercises: shuffleArray(getExercises(1)),
+        description: getDescription(1),
         progress: {
           i: 0,
           current: 1,
@@ -95,11 +106,24 @@
       setBtnText(action) {
         this.btnText = getBtnText(action);
       },
+      cleanAnswerString(){
+        if(!this.answer){
+          return;
+        }
+        this.answer = this.answer.toLowerCase().trim();
+      },
+      saveAnswer(){
+        this.exercises[this.progress.i]['isCorrect'] = this.isCorrectAnswer;
+        this.exercises[this.progress.i]['answer'] = this.answer;
+      },
       handleAnswer() {
+        this.cleanAnswerString();
+
         if(hasEqualCleanString(this.answer, this.exercises[this.progress.i].solution)){
           this.isCorrectAnswer = true;
           this.progress.score++;
         }
+        this.saveAnswer();
       },
       goToNextExercise() {
         this.progress.i++;
@@ -109,6 +133,18 @@
         this.answer = '';
         this.isCorrectAnswer= false;
       },
+      createResultData(vm) {
+        const result = {
+          'id': new Date().valueOf(),
+          'date': new Date(),
+          'score': vm.progress.score,
+          'total': vm.progress.total,
+          'percentage': getPercentage(vm.progress.score, vm.progress.total),
+          'exercises': vm.exercises,
+          'description': vm.description,
+        }
+        return result;
+      }
     },
     mounted() {
       this.progress.total = this.exercises.length;
@@ -147,7 +183,9 @@
       ExerciseEventBus.$on('next', () => {
         vm.isAnswering = !vm.isAnswering;
         if(vm.isLastOne && vm.isAnswering){
-          ContentEventBus.$emit('showScoreBoard', vm.progress);
+          const result = vm.createResultData(vm);
+          postExerciseResult(result);
+          ContentEventBus.$emit('showScoreBoard', result);
           return;
         }
       });

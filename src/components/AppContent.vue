@@ -19,14 +19,15 @@
   export default {
     name: 'AppContent',
     data: function() {
-      const today = new Date();
       return {
         playing: true,
         lastExercise: {
-          date: today,
+          date: null,
           score: null,
           total: null,
-          percentage: null
+          percentage: null,
+          exercises: {},
+          description: {}
         }
       }
     },
@@ -34,10 +35,10 @@
         const vm = this;
 
         ContentEventBus.$on('showScoreBoard', (data) => {
-          vm.lastExercise.score = data.score;
-          vm.lastExercise.total = data.total;
-          vm.lastExercise.percentage = Math.round((data.score / data.total) * 100);
-          vm.playing = false;
+          console.log('data in showScoreBoard :::')
+          console.log(data);
+          vm.lastExercise = data;
+          vm.playing = false
         });
 
         ContentEventBus.$on('reStartExercises', () => {

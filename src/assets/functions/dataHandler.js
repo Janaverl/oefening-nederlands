@@ -27,7 +27,10 @@ function getDescription(id) {
     const filteredList = jsonExerciseTypes.filter(function(item){
         return item.id == id;         
     })
-    return filteredList[0]['description'];
+    return {
+        "long": filteredList[0]['description'],
+        "short": filteredList[0]['short']
+    }
 }
 
 function getExercises(id) {
@@ -35,9 +38,8 @@ function getExercises(id) {
         return item.exerciseTypeId == id;         
     })
 
-    const description = getDescription(id);
     for (let i=0; i<filteredList.length; i++) {
-        filteredList[i]['exerciseType'] = description;
+        filteredList[i]['id'] = i;
     }
 
     return filteredList;
@@ -48,7 +50,7 @@ function getDate(date) {
     var mm = String(date.getMonth() + 1).padStart(2, '0');
     var yyyy = date.getFullYear();
 
-    return mm + '/' + dd + '/' + yyyy;
+    return dd + '/' + mm + '/' + yyyy;
 }
 
 function getAllExercisesDone(){
@@ -60,11 +62,18 @@ function getAllExercisesDone(){
     return [];
 }
 
-function setLastExercise(lastExercise){
+function postExerciseResult(exercise){
     const allExercises = getAllExercisesDone();
+    
+    for(let i=allExercises.length-1; i >= 0 ; i--){
+        if(!allExercises[i].id){
+            allExercises.splice(i,1)
+        }
+        console.log(allExercises);
+    }
 
-    lastExercise.date = getDate(lastExercise.date);
-    allExercises.unshift(lastExercise);
+    exercise.date = getDate(exercise.date);
+    allExercises.unshift(exercise);
 
     localStorage.setItem("allExercises", JSON.stringify(allExercises));
 }
@@ -76,6 +85,7 @@ export {
     getScoreTitle,
     getScoreMessage,
     getExercises,
-    setLastExercise
+    getDescription,
+    postExerciseResult
 }
 
