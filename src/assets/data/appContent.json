@@ -5,6 +5,13 @@
         "textFinish": "Toon me mijn score",
         "textReplay": "Start opnieuw"
     },
+    "menu": {
+        "name": "dit is het menu",
+        "items": {
+            "openScoreBoard": "Bekijk mijn scores",
+            "startExcercise": "Start een nieuwe oefening"
+        }
+    },
     "score": {
         "high":
         {

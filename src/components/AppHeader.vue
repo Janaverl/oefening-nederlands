@@ -1,5 +1,4 @@
 <template>
-<div>
     <nav
         class="navbar navbar-light bg-light mb-5"
     >
@@ -11,23 +10,11 @@
 
         <span
             class="navbar-text"
-            @click="showMenu = !showMenu"
+            @click="openMenu()"
         >
-            Menu
+            {{menuName}}
         </span>
     </nav>
-    <div v-if="showMenu"
-        class="menu"
-        @click="showMenu = !showMenu"
-    >
-        <p
-            @click="openScoreBoard()"
-        >alle scores</p>
-        <p
-            @click="startExcercise()"
-        >nieuwe oefening starten</p>
-    </div>
-</div>
 </template>
 
 <script>
@@ -35,25 +22,17 @@
 
     export default {
         name: 'AppHeader',
-        data: function() {
-            return {
-                showMenu: false
-            };
-        },
         props: {
-            appTitle: String
+            appTitle: String,
+            menuName: String
         },
         methods: {
-            openScoreBoard() {
-                ContentEventBus.$emit('openScoreBoard')
-            },
-            startExcercise() {
-                ContentEventBus.$emit('reStartExercises');
+            openMenu() {
+                ContentEventBus.$emit('toggleMenu', true);
             },
         }
-
     }
 </script>
 
-<style scoped>
+<style>
 </style>

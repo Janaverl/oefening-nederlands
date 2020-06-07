@@ -11,6 +11,14 @@ function getAppCreatedBy() {
     return jsonAppInformation.createdBy;
 }
 
+function getMenuName() {
+    return jsonAppContent.menu.name;
+}
+
+function getMenuItems() {
+    return jsonAppContent.menu.items;
+}
+
 function getBtnText(action) {
     return jsonAppContent.btn[action];
 }
@@ -80,6 +88,8 @@ function postExerciseResult(exercise){
 export {
     getAppTitle,
     getAppCreatedBy,
+    getMenuName,
+    getMenuItems,
     getBtnText,
     getScoreTitle,
     getScoreMessage,

@@ -3,7 +3,13 @@
 
     <app-header 
       :appTitle = appTitle
+      :menuName = menuName
     ></app-header>
+
+    <app-menu
+      v-if="showMenu"
+      :menuItems = menuItems
+    ></app-menu>
 
     <app-content
       class="content"
@@ -19,21 +25,40 @@
 
 <script>
   import AppHeader from './components/AppHeader.vue'
+  import AppMenu from './components/AppMenu.vue'
   import AppContent from './components/AppContent.vue'
   import AppFooter from './components/AppFooter.vue'
 
-  import {getAppTitle, getAppCreatedBy} from './assets/functions/dataHandler.js';
+  import {
+    getAppTitle,
+    getAppCreatedBy,
+    getMenuName,
+    getMenuItems
+  } from './assets/functions/dataHandler.js';
+
+  import {ContentEventBus} from './main.js';
 
   export default {
     name: 'App',
     data: function() {
-        return {
-          appTitle: getAppTitle(),
-          createdBy: getAppCreatedBy()
-        };
+      return {
+        appTitle: getAppTitle(),
+        createdBy: getAppCreatedBy(),
+        menuName: getMenuName(),
+        menuItems: getMenuItems(),
+        showMenu: false
+      };
+    },
+    created() {
+      const vm = this; 
+
+      ContentEventBus.$on('toggleMenu', (isShowing) => {
+        vm.showMenu = isShowing;
+      });
     },
     components: {
       AppHeader,
+      AppMenu,
       AppContent,
       AppFooter
     }
