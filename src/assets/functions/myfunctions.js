@@ -20,7 +20,7 @@ function hasEqualCleanString(myAnswer, answer) {
 }
 
 function getPercentage(current, total) {
-    return ((current / total)*100);
+    return (Math.round((current / total)*100));
 }
 
 function isLastExercise(currentNr, total){
