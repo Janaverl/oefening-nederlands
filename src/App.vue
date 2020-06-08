@@ -6,10 +6,12 @@
       :menuName = menuName
     ></app-header>
 
-    <app-menu
-      v-if="showMenu"
-      :menuItems = menuItems
-    ></app-menu>
+    <transition name="fade">
+      <app-menu
+        v-if="showMenu"
+        :menuItems = menuItems
+      ></app-menu>
+    </transition>
 
     <app-content
       class="content"
@@ -76,6 +78,16 @@
 
   .content {
     flex: 1;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .7s;
+  }
+  .fade-enter-to, .fade-leave {
+    opacity: 1;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 
 </style>

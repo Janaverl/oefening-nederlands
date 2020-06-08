@@ -1,21 +1,21 @@
 <template>
-    <div 
-        class="menu bg-primary"
-        @click="closeMenu()"
-    >
-
-        <p
-            @click="openScoreBoard()"
+        <div 
+            class="menu bg-primary"
+            @click="closeMenu()"
         >
-            {{menuItems.openScoreBoard}}
-        </p>
-        <p
-            @click="startExcercise()"
-        >
-            {{menuItems.startExcercise}}
-        </p>
 
-    </div>
+            <p
+                @click="openScoreBoard()"
+            >
+                {{menuItems.openScoreBoard}}
+            </p>
+            <p
+                @click="startExcercise()"
+            >
+                {{menuItems.startExcercise}}
+            </p>
+
+        </div>
 </template>
 
 <script>
