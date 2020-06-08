@@ -3,7 +3,6 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-export const ExerciseEventBus = new Vue();
 export const ContentEventBus = new Vue();
 export const MarkUpEventBus = new Vue();
 
