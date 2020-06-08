@@ -1,55 +1,57 @@
 <template>
-  <card>
+  <row>
+    <card>
 
-      <template v-slot:header>
-        <p>oefening: {{lastExercise.description.short}}</p>
-        <p>datum: {{lastExercise.date}}</p>
-        <p>resultaat: Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{lastExercise.percentage}}%)</p>
-      </template>
+        <template v-slot:header>
+          <p>oefening: {{lastExercise.description.short}}</p>
+          <p>datum: {{lastExercise.date}}</p>
+          <p>resultaat: Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{lastExercise.percentage}}%)</p>
+        </template>
 
-      <template v-slot:title>
-        {{title}}
-      </template>
-      
-      <template v-slot:body>
-        <p>{{message}}</p>
+        <template v-slot:title>
+          {{title}}
+        </template>
+        
+        <template v-slot:body>
+          <p>{{message}}</p>
 
-        <button
-            class="btn btn-primary"
-            @click="reStart"
-        >
-            {{btnText}}
-        </button>
+          <button-next
+            :btnText = btnText
+            @btn-confirm="reStart"
+          ></button-next>
 
-        <div class="row border font-weight-bold mt-5">
-            <p class="col-4">opdracht</p>
-            <p class="col-4">jouw oplossing</p>
-            <p class="col-4">juiste oplossing</p>
-        </div>
-
-        <div
-          v-for="exercise in lastExercise.exercises"
-          :key="exercise.id"
-        >
-          <div
-            :class="['row',
-              'border',
-              {'text-success': exercise.isCorrect},
-              {'text-danger': !exercise.isCorrect}
-            ]"
-          >
-            <p class="col-4">{{exercise.exercise}}</p>
-            <p class="col-4">{{exercise.answer}}</p>
-            <p class="col-4">{{exercise.solution}}</p>
+          <div class="row border font-weight-bold mt-5">
+              <p class="col-4">opdracht</p>
+              <p class="col-4">jouw oplossing</p>
+              <p class="col-4">juiste oplossing</p>
           </div>
 
-        </div>
-      </template>
-  </card>
+          <div
+            v-for="exercise in lastExercise.exercises"
+            :key="exercise.id"
+          >
+            <div
+              :class="['row',
+                'border',
+                {'text-success': exercise.isCorrect},
+                {'text-danger': !exercise.isCorrect}
+              ]"
+            >
+              <p class="col-4">{{exercise.exercise}}</p>
+              <p class="col-4">{{exercise.answer}}</p>
+              <p class="col-4">{{exercise.solution}}</p>
+            </div>
+
+          </div>
+        </template>
+    </card>
+  </row>
 </template>
 
 <script>
+  import Row from '../Reusable/Row.vue';
   import Card from '../Reusable/Card.vue';
+  import ButtonNext from '../Reusable/ButtonNext';
 
   import {ContentEventBus} from '../../main.js';
 
@@ -90,7 +92,9 @@
             }
         },
         components: {
-            Card
+            Row,
+            Card,
+            ButtonNext
         }
     }
 </script>

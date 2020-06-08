@@ -5,28 +5,20 @@
     <div
       class="mb-5"
     >
-      <div
-        class="row justify-content-md-center"
-      >
-        <div
-          class="col-md-6"
-          >
 
-          <exercises
-            v-if="playing"
-          ></exercises>
+      <exercises
+        v-if="playing"
+      ></exercises>
 
-          <scores-detail
-            v-else-if="!showAllResults"
-            :lastExercise=lastExercise
-          ></scores-detail>
+      <scores-detail
+        v-else-if="!showAllResults"
+        :lastExercise=lastExercise
+      ></scores-detail>
 
-          <scores
-            v-else
-          ></scores> 
-
-        </div>
-      </div>
+      <scores
+        v-else
+      ></scores> 
+        
     </div>
   </div>
 </template>

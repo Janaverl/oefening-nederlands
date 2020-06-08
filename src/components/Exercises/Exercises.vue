@@ -1,4 +1,5 @@
 <template>
+  <row>
     <card>
         
         <template v-slot:header>
@@ -19,9 +20,11 @@
             :correctAnswer="exercises[progress.i].solution"
           ></exercises-solution>
           
-          <exercises-button
+          <button-next
             :btnText = btnText
-          ></exercises-button>
+            @btn-confirm="next"
+          ></button-next>
+
         </template>
 
         <template v-slot:footer>
@@ -39,16 +42,17 @@
         </template>
 
     </card>
+  </row>
 </template>
 
 <script>
-  import Card from '../Reusable/Card.vue';
+  import Row from '../Reusable/Row';
+  import Card from '../Reusable/Card';
+  import ButtonNext from '../Reusable/ButtonNext';
   import ExercisesInput from './ExercisesInput';
-  import ExercisesButton from './ExercisesButton';
   import ExercisesSolution from './ExercisesSolution';
 
   import {
-    ExerciseEventBus,
     ContentEventBus,
     MarkUpEventBus
   } from '../../main.js';
@@ -133,6 +137,15 @@
           'description': vm.description,
         }
         return result;
+      },
+      next() {
+        this.isAnswering = !this.isAnswering;
+        if(this.isLastOne && this.isAnswering){
+          const result = this.createResultData(this);
+          postExerciseResult(result);
+          ContentEventBus.$emit('showDetailsExercise', result);
+          return;
+        }
       }
     },
     mounted() {
@@ -174,15 +187,7 @@
     },
     created() {
       const vm = this;
-      ExerciseEventBus.$on('next', () => {
-        vm.isAnswering = !vm.isAnswering;
-        if(vm.isLastOne && vm.isAnswering){
-          const result = vm.createResultData(vm);
-          postExerciseResult(result);
-          ContentEventBus.$emit('showDetailsExercise', result);
-          return;
-        }
-      });
+
       ContentEventBus.$on('reStartExercises', () => {
           Object.assign(vm.$data, vm.$options.data());
           this.progress.total = this.exercises.length;
@@ -191,13 +196,18 @@
       });
     },
     components: {
+        Row,
         Card,
+        ButtonNext,
         ExercisesInput,
-        ExercisesButton,
         ExercisesSolution
     }
   }
 </script>
 
-<style>
+<style scoped>
+    button{
+        position: absolute;
+        bottom: 20px;
+    }
 </style>
