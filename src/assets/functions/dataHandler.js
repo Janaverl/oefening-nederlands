@@ -31,6 +31,10 @@ function getScoreMessage(level) {
     return jsonAppContent.score[level]['message'];
 }
 
+function getScoreBoardText() {
+    return jsonAppContent.scoreBoard;
+}
+
 function getDescription(id) {
     const filteredList = jsonExerciseTypes.filter(function(item){
         return item.id == id;         
@@ -61,22 +65,35 @@ function getDate(date) {
     return dd + '/' + mm + '/' + yyyy;
 }
 
-function getAllExercisesDone(){
-    if (localStorage.allExercises) {
-        var jsonString = localStorage.getItem("allExercises");
-        const allExercises = JSON.parse(jsonString);
-        return allExercises;
-    }
-    return [];
-}
-
-function postExerciseResult(exercise){
-    const allExercises = getAllExercisesDone();
-    
+function removeTestData(allExercises){
     for(let i=allExercises.length-1; i >= 0 ; i--){
         if(!allExercises[i].id){
             allExercises.splice(i,1)
         }
+    }
+
+    if(allExercises.length <= 0){
+        return null;
+    }
+
+    return allExercises;
+}
+
+function getAllExercisesDone(){
+    if (localStorage.allExercises) {
+        var jsonString = localStorage.getItem("allExercises");
+        const allExercises = JSON.parse(jsonString);
+
+        return removeTestData(allExercises);
+    }
+    return null;
+}
+
+function postExerciseResult(exercise){
+    let allExercises = getAllExercisesDone();
+
+    if(allExercises == null){
+        allExercises = [];
     }
 
     exercise.date = getDate(exercise.date);
@@ -93,6 +110,7 @@ export {
     getBtnText,
     getScoreTitle,
     getScoreMessage,
+    getScoreBoardText,
     getExercises,
     getDescription,
     postExerciseResult,

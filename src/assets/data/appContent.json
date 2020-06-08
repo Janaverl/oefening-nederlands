@@ -31,5 +31,14 @@
             "title": "Kan beter.",
             "message": "Wil je nog eens proberen?"
         }
+    },
+    "scoreBoard": {
+        "title": "bekijk hier jouw scores",
+        "columns": {
+            "date": "datum",
+            "exerciseType": "oefening",
+            "score": "jouw score"
+        },
+        "noContent": "Maak eerst een oefening om hier je score te kunnen zien."
     }
 }
