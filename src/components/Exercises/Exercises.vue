@@ -190,9 +190,9 @@
 
       ContentEventBus.$on('reStartExercises', () => {
           Object.assign(vm.$data, vm.$options.data());
-          this.progress.total = this.exercises.length;
-          this.progress.track = getPercentage(this.progress.current, this.progress.total);
-          this.setBtnText("textCheck");
+          vm.progress.total = vm.exercises.length;
+          vm.progress.track = getPercentage(vm.progress.current, vm.progress.total);
+          vm.setBtnText("textCheck");
       });
     },
     components: {
