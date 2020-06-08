@@ -66,7 +66,6 @@
         },
         methods: {
             showDetails(exercise) {
-                console.log(this.text);
                 ContentEventBus.$emit('showDetailsExercise', exercise);
             }
         },
