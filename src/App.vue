@@ -83,9 +83,6 @@
   .fade-enter-active, .fade-leave-active {
     transition: opacity .7s;
   }
-  .fade-enter-to, .fade-leave {
-    opacity: 1;
-  }
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
