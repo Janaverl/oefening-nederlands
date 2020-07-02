@@ -11,8 +11,6 @@
 </template>
 
 <script>
-    import {MarkUpEventBus} from '../../main.js';
-
     export default {
         name: 'Row'
     }
