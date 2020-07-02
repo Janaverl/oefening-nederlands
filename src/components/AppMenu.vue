@@ -21,10 +21,14 @@
 <script>
     import {ContentEventBus} from '../main.js';
 
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'AppMenu',
-        props: {
-            menuItems: Object,
+        computed: {
+            ...mapGetters([
+                'menuItems'
+            ])
         },
         methods: {
             closeMenu() {

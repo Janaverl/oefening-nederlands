@@ -1,15 +1,11 @@
 <template>
   <div id="app">
 
-    <app-header 
-      :appTitle = appTitle
-      :menuName = menuName
-    ></app-header>
+    <app-header></app-header>
 
     <transition name="fade">
       <app-menu
         v-if="showMenu"
-        :menuItems = menuItems
       ></app-menu>
     </transition>
 
@@ -17,10 +13,7 @@
       class="content"
     ></app-content>
 
-    <app-footer
-      :name = createdBy.name
-      :website = createdBy.website
-    ></app-footer>
+    <app-footer></app-footer>
     
   </div>
 </template>
@@ -33,27 +26,12 @@
 
   import { mapGetters } from 'vuex';
 
-  import {
-    getAppTitle,
-    getAppCreatedBy,
-    getMenuName,
-    getMenuItems
-  } from './assets/functions/dataHandler.js';
-
   export default {
     name: 'App',
     computed: {
       ...mapGetters([
         'showMenu'
       ])
-    },
-    data: function() {
-      return {
-        appTitle: getAppTitle(),
-        createdBy: getAppCreatedBy(),
-        menuName: getMenuName(),
-        menuItems: getMenuItems()
-      };
     },
     components: {
       AppHeader,

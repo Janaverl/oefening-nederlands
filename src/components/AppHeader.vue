@@ -18,11 +18,15 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'AppHeader',
-        props: {
-            appTitle: String,
-            menuName: String
+        computed: {
+            ...mapGetters([
+                'appTitle',
+                'menuName'
+            ])
         },
         methods: {
             openMenu() {

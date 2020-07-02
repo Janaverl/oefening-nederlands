@@ -6,21 +6,24 @@
         >
             created by
             <a
-                :href="[website]"
+                :href="[createdBy.website]"
             >
-                {{name}}
+                {{createdBy.name}}
             </a>
         </div>
     </footer>
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         name: 'AppFooter',
-        props: {
-            name: String,
-            website: String
-        }
+        computed: {
+            ...mapGetters([
+                'createdBy'
+            ])
+        },
     }
 </script>
 

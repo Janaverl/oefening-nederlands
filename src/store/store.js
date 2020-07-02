@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import appInformation from './modules/appInformation'
+import appMenu from './modules/appMenu'
+
 import * as actions from './actions';
 import * as mutations from './mutations';
 import * as getters from './getters';
@@ -18,5 +21,9 @@ export const store = new Vuex.Store({
   },
   getters,
   mutations,
-  actions
+  actions,
+  modules: {
+    appInformation,
+    appMenu
+  }
 })
