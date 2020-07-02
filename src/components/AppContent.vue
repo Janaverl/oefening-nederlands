@@ -32,10 +32,16 @@
 
   export default {
     name: 'AppContent',
+    computed: {
+      playing () {
+        return this.$store.state.playing
+      },
+      showAllResults () {
+        return this.$store.state.showAllResults
+      }
+    },
     data: function() {
       return {
-        playing: true,
-        showAllResults: false,
         lastExercise: {
           date: null,
           score: null,
@@ -49,11 +55,6 @@
     created() {
         const vm = this;
 
-        ContentEventBus.$on('openScoreBoard', () => {
-          vm.playing = false,
-          vm.showAllResults = true
-        });
-
         ContentEventBus.$on('reStartExercises', () => {
           Object.assign(vm.$data, vm.$options.data());
         });
@@ -61,8 +62,8 @@
         ContentEventBus.$on('showDetailsExercise', (data) => {
           console.log(data);
           vm.lastExercise = data;
-          vm.playing = false
-          vm.showAllResults = false
+          this.$store.commit('togglePlaying', false)
+          this.$store.commit('toggleScoreboard', false)
         });
     },
     components: {

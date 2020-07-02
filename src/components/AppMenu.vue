@@ -31,9 +31,12 @@
                 this.$store.commit('toggleMenu', false)
             },
             openScoreBoard() {
-                ContentEventBus.$emit('openScoreBoard')
+                this.$store.commit('togglePlaying', false)
+                this.$store.commit('toggleScoreboard', true)
             },
             startExcercise() {
+                this.$store.commit('togglePlaying', true)
+                this.$store.commit('toggleScoreboard', false)
                 ContentEventBus.$emit('reStartExercises');
             },
         }

@@ -53,8 +53,6 @@
   import Card from '../Reusable/Card.vue';
   import ButtonNext from '../Reusable/ButtonNext';
 
-  import {ContentEventBus} from '../../main.js';
-
   import {
     getBtnText,
     getScoreTitle,
@@ -75,7 +73,7 @@
         },
         methods: {
             reStart() {
-                ContentEventBus.$emit('reStartExercises');
+                this.$store.commit('togglePlaying', true)
             },
             setText(level) {
               this.title = getScoreTitle(level);
