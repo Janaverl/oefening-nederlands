@@ -4,7 +4,7 @@
     >
         <span
             class="navbar-brand"
-            >
+        >
             {{ appTitle }}
         </span>
 
@@ -18,8 +18,6 @@
 </template>
 
 <script>
-    import {ContentEventBus} from '../main.js';
-
     export default {
         name: 'AppHeader',
         props: {
@@ -28,8 +26,8 @@
         },
         methods: {
             openMenu() {
-                ContentEventBus.$emit('toggleMenu', true);
-            },
+                this.$store.commit('toggleMenu', true)
+            }
         }
     }
 </script>

@@ -38,25 +38,20 @@
     getMenuItems
   } from './assets/functions/dataHandler.js';
 
-  import {ContentEventBus} from './main.js';
-
   export default {
     name: 'App',
+    computed: {
+      showMenu () {
+        return this.$store.state.showMenu
+      }
+    },
     data: function() {
       return {
         appTitle: getAppTitle(),
         createdBy: getAppCreatedBy(),
         menuName: getMenuName(),
-        menuItems: getMenuItems(),
-        showMenu: false
+        menuItems: getMenuItems()
       };
-    },
-    created() {
-      const vm = this; 
-
-      ContentEventBus.$on('toggleMenu', (isShowing) => {
-        vm.showMenu = isShowing;
-      });
     },
     components: {
       AppHeader,

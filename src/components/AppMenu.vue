@@ -28,7 +28,7 @@
         },
         methods: {
             closeMenu() {
-                ContentEventBus.$emit('toggleMenu', false);
+                this.$store.commit('toggleMenu', false)
             },
             openScoreBoard() {
                 ContentEventBus.$emit('openScoreBoard')
