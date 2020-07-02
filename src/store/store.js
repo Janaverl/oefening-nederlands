@@ -7,7 +7,10 @@ export const store = new Vuex.Store({
   state: {
     showMenu: false,
     playing: true,
-    showAllResults: false
+    scoreboard: {
+        show: false,
+        detailed: false
+    }
   },
   mutations: {
     toggleMenu (state, show) {
@@ -16,9 +19,17 @@ export const store = new Vuex.Store({
     togglePlaying (state, show) {
         state.playing = show;
     },
-    toggleScoreboard (state, show) {
-        state.showAllResults = show;
-    }
+    hideScoreboard(state) {
+        state.scoreboard.show = false;
+    },
+    toggleScoreboardOverview (state, show) {
+        state.scoreboard.show = show;
+        state.scoreboard.detailed = false;
+    },
+    toggleScoreboardDetail (state, show) {
+        state.scoreboard.show = show;
+        state.scoreboard.detailed = true;
+    },
   },
   actions: {
     toggleMenu ({commit}, show) {
@@ -26,15 +37,15 @@ export const store = new Vuex.Store({
     },
     startGame({commit}) {
         commit('togglePlaying', true);
-        commit('toggleScoreboard', false);
+        commit('hideScoreboard');
     },
     endGame({commit}) {
         commit('togglePlaying', false);
-        commit('toggleScoreboard', false);
+        commit('toggleScoreboardDetail', true);
     },
     showScoreboard({commit}) {
         commit('togglePlaying', false);
-        commit('toggleScoreboard', true);
+        commit('toggleScoreboardOverview', true);
     },
 
   }

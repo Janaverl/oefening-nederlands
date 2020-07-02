@@ -11,7 +11,7 @@
       ></exercises>
 
       <scores-detail
-        v-else-if="!showAllResults"
+        v-else-if="scoreboard.show && scoreboard.detailed"
         :lastExercise=lastExercise
       ></scores-detail>
 
@@ -36,8 +36,8 @@
       playing () {
         return this.$store.state.playing
       },
-      showAllResults () {
-        return this.$store.state.showAllResults
+      scoreboard () {
+        return this.$store.state.scoreboard
       }
     },
     data: function() {
