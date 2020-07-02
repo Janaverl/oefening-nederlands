@@ -28,17 +28,17 @@
   import Scores from './Score/Scores.vue'
   import ScoresDetail from './Score/ScoresDetail.vue'
 
+  import { mapGetters } from 'vuex';
+
   import {ContentEventBus} from '../main.js';
 
   export default {
     name: 'AppContent',
     computed: {
-      playing () {
-        return this.$store.state.playing
-      },
-      scoreboard () {
-        return this.$store.state.scoreboard
-      }
+      ...mapGetters([
+        'playing',
+        'scoreboard'
+      ])
     },
     data: function() {
       return {

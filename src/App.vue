@@ -31,6 +31,8 @@
   import AppContent from './components/AppContent.vue'
   import AppFooter from './components/AppFooter.vue'
 
+  import { mapGetters } from 'vuex';
+
   import {
     getAppTitle,
     getAppCreatedBy,
@@ -41,9 +43,9 @@
   export default {
     name: 'App',
     computed: {
-      showMenu () {
-        return this.$store.state.showMenu
-      }
+      ...mapGetters([
+        'showMenu'
+      ])
     },
     data: function() {
       return {
