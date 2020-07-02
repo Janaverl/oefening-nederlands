@@ -26,7 +26,7 @@
         },
         methods: {
             openMenu() {
-                this.$store.commit('toggleMenu', true)
+                this.$store.dispatch('toggleMenu', true)
             }
         }
     }

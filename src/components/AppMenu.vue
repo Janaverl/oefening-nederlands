@@ -28,15 +28,13 @@
         },
         methods: {
             closeMenu() {
-                this.$store.commit('toggleMenu', false)
+                this.$store.dispatch('toggleMenu', false)
             },
             openScoreBoard() {
-                this.$store.commit('togglePlaying', false)
-                this.$store.commit('toggleScoreboard', true)
+                this.$store.dispatch('showScoreboard')
             },
             startExcercise() {
-                this.$store.commit('togglePlaying', true)
-                this.$store.commit('toggleScoreboard', false)
+                this.$store.dispatch('startGame');
                 ContentEventBus.$emit('reStartExercises');
             },
         }

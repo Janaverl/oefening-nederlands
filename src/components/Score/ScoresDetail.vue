@@ -73,7 +73,7 @@
         },
         methods: {
             reStart() {
-                this.$store.commit('togglePlaying', true)
+                this.$store.dispatch('startGame');
             },
             setText(level) {
               this.title = getScoreTitle(level);

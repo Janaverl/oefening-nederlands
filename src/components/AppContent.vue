@@ -62,8 +62,7 @@
         ContentEventBus.$on('showDetailsExercise', (data) => {
           console.log(data);
           vm.lastExercise = data;
-          this.$store.commit('togglePlaying', false)
-          this.$store.commit('toggleScoreboard', false)
+          this.$store.dispatch('endGame')
         });
     },
     components: {

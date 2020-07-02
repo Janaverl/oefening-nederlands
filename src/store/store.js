@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
   },
   mutations: {
     toggleMenu (state, show) {
-      state.showMenu = show;
+        state.showMenu = show;
     },
     togglePlaying (state, show) {
         state.playing = show;
@@ -19,5 +19,23 @@ export const store = new Vuex.Store({
     toggleScoreboard (state, show) {
         state.showAllResults = show;
     }
+  },
+  actions: {
+    toggleMenu ({commit}, show) {
+        commit('toggleMenu', show)
+    },
+    startGame({commit}) {
+        commit('togglePlaying', true);
+        commit('toggleScoreboard', false);
+    },
+    endGame({commit}) {
+        commit('togglePlaying', false);
+        commit('toggleScoreboard', false);
+    },
+    showScoreboard({commit}) {
+        commit('togglePlaying', false);
+        commit('toggleScoreboard', true);
+    },
+
   }
 })
