@@ -46,5 +46,20 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .menu{
+        color: white;
+        margin: 0;
+        z-index: 1000;
+        background-color: grey;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        min-width: 50vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 </style>

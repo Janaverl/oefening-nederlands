@@ -56,9 +56,10 @@
   }
 
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .7s;
+    transition: all 700ms ease;
   }
   .fade-enter, .fade-leave-to {
+    transform: translateX(0);
     opacity: 0;
   }
 
