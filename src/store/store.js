@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import appInformation from './modules/appInformation'
 import appMenu from './modules/appMenu'
+import score from './modules/score'
 
 import * as actions from './actions';
 import * as mutations from './mutations';
@@ -24,6 +25,7 @@ export const store = new Vuex.Store({
   actions,
   modules: {
     appInformation,
-    appMenu
+    appMenu,
+    score
   }
 })

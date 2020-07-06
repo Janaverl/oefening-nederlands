@@ -2,22 +2,22 @@
     <row>
         <card>
             <template v-slot:header>
-                {{text.title}}
+                {{scoreBoardText.title}}
             </template>
             
             <template
                 v-slot:body
-                v-if="allExercises"
+                v-if="resultAllExercises"
             >
                 
                 <div class="row border font-weight-bold mt-5">
-                    <p class="col-4">{{text.columns.date}}</p>
-                    <p class="col-4">{{text.columns.exerciseType}}</p>
-                    <p class="col-4">{{text.columns.score}}</p>
+                    <p class="col-4">{{scoreBoardText.columns.date}}</p>
+                    <p class="col-4">{{scoreBoardText.columns.exerciseType}}</p>
+                    <p class="col-4">{{scoreBoardText.columns.score}}</p>
                 </div>
 
                 <div
-                    v-for="exercise in allExercises"
+                    v-for="exercise in resultAllExercises"
                     :key="exercise.id"
                 >
                     <div
@@ -38,7 +38,7 @@
                 v-slot:body
                 v-else
             >
-                {{text.noContent}}
+                {{scoreBoardText.noContent}}
             </template>
             
         </card>
@@ -49,20 +49,17 @@
     import Row from '../Reusable/Row.vue';
     import Card from '../Reusable/Card.vue';
 
-    import {
-        getScoreBoardText,
-        getAllExercisesDone
-    } from '../../assets/functions/dataHandler.js'
+    import { mapGetters } from 'vuex';
     
     import {ContentEventBus} from '../../main.js';
 
     export default {
         name: 'Scores',
-        data: function() {
-            return{
-                allExercises: getAllExercisesDone(),
-                text: getScoreBoardText(),
-            }
+        computed: {
+            ...mapGetters([
+                'resultAllExercises',
+                'scoreBoardText'
+            ])
         },
         methods: {
             showDetails(exercise) {
