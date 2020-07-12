@@ -12,7 +12,7 @@
 
       <scores-detail
         v-else-if="scoreboard.show && scoreboard.detailed"
-        :lastExercise=lastExercise
+        :currentExercise=currentExercise
       ></scores-detail>
 
       <scores
@@ -30,40 +30,14 @@
 
   import { mapGetters } from 'vuex';
 
-  import {ContentEventBus} from '../main.js';
-
   export default {
     name: 'AppContent',
     computed: {
       ...mapGetters([
         'playing',
-        'scoreboard'
+        'scoreboard',
+        'currentExercise'
       ])
-    },
-    data: function() {
-      return {
-        lastExercise: {
-          date: null,
-          score: null,
-          total: null,
-          percentage: null,
-          exercises: {},
-          description: {}
-        }
-      }
-    },
-    created() {
-        const vm = this;
-
-        ContentEventBus.$on('reStartExercises', () => {
-          Object.assign(vm.$data, vm.$options.data());
-        });
-        
-        ContentEventBus.$on('showDetailsExercise', (data) => {
-          console.log(data);
-          vm.lastExercise = data;
-          this.$store.dispatch('endGame')
-        });
     },
     components: {
       Exercises,

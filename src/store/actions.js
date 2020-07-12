@@ -16,3 +16,8 @@ export const showScoreboard = ({commit}) => {
     commit('togglePlaying', false);
     commit('toggleScoreboardOverview', true);
 }
+
+export const showScoreboardDetail = ({commit}) => {
+    commit('togglePlaying', false);
+    commit('toggleScoreboardDetail', true);
+}

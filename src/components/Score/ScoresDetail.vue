@@ -3,9 +3,9 @@
     <card>
 
         <template v-slot:header>
-          <p>oefening: {{lastExercise.description.short}}</p>
-          <p>datum: {{lastExercise.date}}</p>
-          <p>resultaat: Je behaalde {{lastExercise.score}} op {{ lastExercise.total }} ({{lastExercise.percentage}}%)</p>
+          <p>oefening: {{currentExercise.description.short}}</p>
+          <p>datum: {{currentExercise.date}}</p>
+          <p>resultaat: Je behaalde {{currentExercise.score}} op {{ currentExercise.total }} ({{currentExercise.percentage}}%)</p>
         </template>
 
         <template v-slot:title>
@@ -27,7 +27,7 @@
           </div>
 
           <div
-            v-for="exercise in lastExercise.exercises"
+            v-for="exercise in currentExercise.exercises"
             :key="exercise.id"
           >
             <div
@@ -69,7 +69,7 @@
             };
         },
         props: {
-            lastExercise: Object
+            currentExercise: Object
         },
         methods: {
             reStart() {
@@ -81,9 +81,9 @@
             },
         },
         mounted() {
-            if(this.lastExercise.percentage === 100) {
+            if(this.currentExercise.percentage === 100) {
                 this.setText('high');
-            } else if (this.lastExercise.percentage >= 50) {
+            } else if (this.currentExercise.percentage >= 50) {
                 this.setText('medium');
             } else {
                 this.setText('low');

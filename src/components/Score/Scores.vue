@@ -51,7 +51,7 @@
 
     import { mapGetters } from 'vuex';
     
-    import {ContentEventBus} from '../../main.js';
+    // import {ContentEventBus} from '../../main.js';
 
     export default {
         name: 'Scores',
@@ -63,7 +63,8 @@
         },
         methods: {
             showDetails(exercise) {
-                ContentEventBus.$emit('showDetailsExercise', exercise);
+                this.$store.dispatch('showScoreboardDetail');
+                this.$store.dispatch('showDetails', exercise);
             }
         },
         components: {

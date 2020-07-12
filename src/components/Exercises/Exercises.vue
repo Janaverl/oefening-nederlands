@@ -65,7 +65,7 @@
   } from '../../assets/functions/myfunctions.js'
 
   import {
-    postExerciseResult,
+    // postExerciseResult,
     getBtnText,
     getExercises,
     getDescription
@@ -127,6 +127,7 @@
         this.isCorrectAnswer= false;
       },
       createResultData(vm) {
+        // TODO: move this to state-management score.js
         const result = {
           'id': new Date().valueOf(),
           'date': new Date(),
@@ -142,8 +143,9 @@
         this.isAnswering = !this.isAnswering;
         if(this.isLastOne && this.isAnswering){
           const result = this.createResultData(this);
-          postExerciseResult(result);
-          ContentEventBus.$emit('showDetailsExercise', result);
+          this.$store.dispatch('saveExercise', result);
+          this.$store.dispatch('showDetails', result);
+          this.$store.dispatch('endGame');
           return;
         }
       }
