@@ -12,7 +12,7 @@
 
       <scores-detail
         v-else-if="scoreboard.show && scoreboard.detailed"
-        :currentExercise=currentExercise
+        :exercise=exerciseDetailsShowing
       ></scores-detail>
 
       <scores
@@ -36,7 +36,7 @@
       ...mapGetters([
         'playing',
         'scoreboard',
-        'currentExercise'
+        'exerciseDetailsShowing'
       ])
     },
     components: {

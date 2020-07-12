@@ -4,8 +4,10 @@ import {
     postExerciseResult
 } from '../../assets/functions/dataHandler.js'
 
-const newExercise = () => {
-    return {
+const state = {
+    allExercises: getAllExercisesDone(),
+    text: getScoreBoardText(),
+    exerciseDetailsShowing: {
         date: null,
         score: null,
         total: null,
@@ -13,12 +15,6 @@ const newExercise = () => {
         exercises: {},
         description: {}
     }
-}
-
-const state = {
-    allExercises: getAllExercisesDone(),
-    text: getScoreBoardText(),
-    currentExercise: newExercise()
 };
 
 const getters = {
@@ -28,17 +24,14 @@ const getters = {
     scoreBoardText: state => {
         return state.text;
     },
-    currentExercise: state => {
-        return state.currentExercise;
+    exerciseDetailsShowing: state => {
+        return state.exerciseDetailsShowing;
     }
 }
 
 const mutations = {
     showDetails: (state, payload) => {
-        state.currentExercise = payload;
-    },
-    resetCurrentExerciseState (state) {
-        state.currentExercise = newExercise();
+        state.exerciseDetailsShowing = payload;
     },
     addScore: (state, payload) => {
         postExerciseResult(payload);
@@ -49,9 +42,8 @@ const mutations = {
 const actions = {
     showDetails: ({ commit }, payload) => {
         commit('showDetails', payload);
-    },
-    resetCurrentExerciseState ({ commit }) {
-        commit('resetCurrentExerciseState');
+        commit('togglePlaying', false);
+        commit('toggleScoreboardDetail', true);
     },
     saveExercise: ({ commit }, payload) => {
         commit('addScore', payload);

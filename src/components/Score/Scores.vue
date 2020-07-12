@@ -63,7 +63,6 @@
         },
         methods: {
             showDetails(exercise) {
-                this.$store.dispatch('showScoreboardDetail');
                 this.$store.dispatch('showDetails', exercise);
             }
         },

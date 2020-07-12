@@ -38,7 +38,6 @@
                 this.$store.dispatch('showScoreboard')
             },
             startExcercise() {
-                this.$store.dispatch('resetCurrentExerciseState');
                 this.$store.dispatch('startGame');
                 ContentEventBus.$emit('reStartExercises');
             },

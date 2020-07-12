@@ -145,7 +145,6 @@
           const result = this.createResultData(this);
           this.$store.dispatch('saveExercise', result);
           this.$store.dispatch('showDetails', result);
-          this.$store.dispatch('endGame');
           return;
         }
       }
